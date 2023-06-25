@@ -16,7 +16,7 @@
 	"license": "MIT",
 	"homepage": "https://github.com/rbgotech-cpp-libs/all-tst_Sw",
 	"dependencies":{
-		"rbgotech/rbgo-types"
+		"rbgotech/rbgo-types": "*"
 	},
 	"frameworks": "*",
 	"platforms": "*"

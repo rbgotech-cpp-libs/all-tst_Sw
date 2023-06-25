@@ -1,0 +1,67 @@
+:document-title: Sw: Stopwatch
+:table-caption: off
+
+= *Sw: Stopwatch*
+
+[.big]"`**_Lightweight stopwatch with microsecond resolution!_**`"
+
+[caption="" cols="25h,~m" frame=all grid=all width=50%]
+|===
+
+|last update
+|20230625
+
+|language
+|C++
+
+|namespace
+|rbgo
+
+|library ref
+|rbgotech/Sw
+
+|entry points
+|Sw.h
+
+|dependencies
+|rbgotech/rbgo-types
+
+|environment
+|VSCode, Platformio
+
+|platform
+|all
+
+|framework
+|all
+|===
+
+=== Description
+
+Class Sw implements this stopwatch.
+
+It is very simple, self explanatory and effective.
+
+The system level function build upon is
+`gettimeofday` declared inside `sys/time.h`.
+
+The following table shows the available methods.
+
+[caption="" cols="40m,~d" frame=all grid=all width=50%]
+|===
+
+| Sw(), ~Sw();
+| Constructor, Destructor.
+
+|void start();
+|Starts an measurement; record current microtimestamp(mts).
+
+|Tf64 stop();
+|Stop a measurement; subtract previous recorded mts with current mts.
+
+|void stopp(const char *pfx="", const char *sfx="");
+|Stop a measurement, like stop(), and print the result to STDOUT.
+
+|Tf64 get(); (private)
+|Create a mts from sys call `gettimeofday` and return it.
+|===

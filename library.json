@@ -1,0 +1,23 @@
+{
+	"name": "rbgotech/Sw",
+	"version": "1.0.0",
+	"description": "Lightweight stopwatch with microsecond resolution.",
+	"keywords": "performance speed test",
+	"repository":{
+		"type": "git",
+		"url": "https://github.com/rbgotech-cpp-libs/all-tst_Sw.git"
+	},
+	"authors":[{
+		"name": "Robert Goossens (rbgo)",
+		"email": "rbgo.web@gmail.com",
+		"homepage": "https://github.com/rbgo",
+		"maintainer": true
+	}],
+	"license": "MIT",
+	"homepage": "https://github.com/rbgotech-cpp-libs/all-tst_Sw",
+	"dependencies":{
+		"rbgotech/rbgo-types"
+	},
+	"frameworks": "*",
+	"platforms": "*"
+}

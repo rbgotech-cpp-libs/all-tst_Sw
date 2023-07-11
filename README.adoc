@@ -1,15 +1,15 @@
-:document-title: Sw: Stopwatch
+:document-title: rbgo-time: Time related functions and classes for the PC!
 :table-caption: off
 
-= *Sw: Stopwatch*
+= *rbgo-time*
 
-[.big]"`**_Lightweight stopwatch with microsecond resolution!_**`"
+[.big]"`**_Time related functions and classes for the PC!_**`"
 
 [caption="" cols="25h,~m" frame=all grid=all width=50%]
 |===
 
 |last update
-|20230625
+|20230711
 
 |language
 |C++
@@ -18,10 +18,10 @@
 |rbgo
 
 |library ref
-|rbgotech/Sw
+|rbgotech/rbgo-time
 
 |entry points
-|Sw.h
+|rbgo-time.h
 
 |dependencies
 |rbgotech/rbgo-types
@@ -30,38 +30,73 @@
 |VSCode, Platformio
 
 |platform
-|all
+|native; linux_x86_64; 
 
 |framework
 |all
+
+|call deps
+|nanosleep() clock_gettime()
 |===
 
 === Description
 
-Class Sw implements this stopwatch.
+This repository represents a library that is all about time and timing, for 32 and 64 bit systems. Note the call deps above; if a system lacks one of those, this lib is probably not usable.
 
-It is very simple, self explanatory and effective.
-
-The system level function build upon is
-`gettimeofday` declared inside `sys/time.h`.
-
-The following table shows the available methods.
-
-[caption="" cols="40m,~d" frame=all grid=all width=50%]
+.Functionality
+[options="header" caption="" cols="4h,6m" frame=all grid=all width=100%]
 |===
+|function
+|description
 
-| Sw(), ~Sw();
-| Constructor, Destructor.
+2+^m|`#Sleep#` functions +
+
+|void slp_ns_f64(Tf64 s)
+|Nano precision sleep function taking double precision float input.
+
+|void slp_ns_u32(Tu32 s, Tu32 ns);
+|Sleep function taking two 32 bits inputs; one for whole seconds, one for nano sub division of a second: 0...999,999,999.
+
+|void slp_us_f32(Tf32 s);
+|Micro precision sleep function expressed in single precision float input.
+
+
+2+^m|`#Time Stamp Counter#` functions +
+
+|Tu64 tsc_ns_u64();
+|Timestamp counter returning nanoseconds since unix epoch.
+
+|Tf64 tsc_ns_f64(Tu64 *cnv=0);
+|Same as previous but in double precision float format, having the nano seconds after the floating point.
+
+|Tu32 tsc_ns_u32();
+|Returns nanoseconds in 32 bits unsigned format, which means that overflow occurs every 4.29 seconds. This can be used for seeding a random number generator.
+
+|Tu32 tsc_us_u32();
+|Returns microseconds in 32 bits unsigned format, which means that overflow occurs every 4294.9 seconds or roughly 1:10h.
+
+|Tf32 tsc_us_f32(Tu32 *cnv=0);
+|Same as previous, but in floating point format, having the microseconds after the floating point.
+
+
+2+^m|`#class Sw(64\|32)#`
+2+d|
+A simple stopwatch class, to measure time intervals. +
+The 64 bit version has nano and the 32 bit version has micro precision. +
+The 64 bit uses tsc_us_u64() and the 32 bits uses tsc_us_u32() functions at the core. These are unsigned and will have correct outcome also when calculating difference separated by overflow. +
+Read the comments on tsc_us_u32(); take note about the limited time span it addresses.
 
 |void start();
-|Starts an measurement; record current microtimestamp(mts).
+|Snapshot and records current timestamp.
 
-|Tf64 stop();
-|Stop a measurement; subtract previous recorded mts with current mts.
+|Tf(64\|32) stop();
+|Return snapshot current timestamp minus the one recorded at start();
+which is the time interval elapsed since calling start();
+
+|void stopb(char* buf, const char *pfx="", const char *sfx="");
+|Same as stop(), but create a string inside buf, having float format %.6f or %.9f, preceded by pfx and followed by sfx.
 
 |void stopp(const char *pfx="", const char *sfx="");
-|Stop a measurement, like stop(), and print the result to STDOUT.
+|Same as stopb(), but printf it immediately.
 
-|Tf64 get(); (private)
-|Create a mts from sys call `gettimeofday` and return it.
 |===

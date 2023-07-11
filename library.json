@@ -1,11 +1,11 @@
 {
-	"name": "rbgotech/Sw",
-	"version": "1.0.0",
-	"description": "Lightweight stopwatch with microsecond resolution.",
+	"name": "rbgotech/rbgo-time",
+	"version": "0.0.1",
+	"description": "Time related functions and classes for the PC!",
 	"keywords": "performance speed test",
 	"repository":{
 		"type": "git",
-		"url": "https://github.com/rbgotech-cpp-libs/all-tst_Sw.git"
+		"url": "https://github.com/rbgotech-cpp-libs/pcs-sys_rbgo-time.git"
 	},
 	"authors":[{
 		"name": "Robert Goossens (rbgo)",
@@ -14,7 +14,7 @@
 		"maintainer": true
 	}],
 	"license": "MIT",
-	"homepage": "https://github.com/rbgotech-cpp-libs/all-tst_Sw",
+	"homepage": "https://github.com/rbgotech-cpp-libs/pcs-sys_rbgo-time",
 	"dependencies":{
 		"rbgotech/rbgo-types": "*"
 	},

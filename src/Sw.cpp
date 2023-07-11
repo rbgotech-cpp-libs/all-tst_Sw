@@ -1,38 +1,58 @@
-#include <Sw.h>
+#include <stdio.h>
+
+#include <rbgo-time.h>
 
 namespace rbgo {
 
-Sw::Sw(){
+#if RBGOTIME64 /////////////////////////////////////////////////////////////////
 
-	tv = new timeval();
-	mts = 0;
+void Sw64::start(){
+	ns = tsc_ns_u64();
 }
 
-Sw::~Sw(){
-	delete tv;
+Tf64 Sw64::stop(){
+
+	Tu64 el = tsc_ns_u64() - ns;
+	return  tsc_ns_f64(&el);
 }
 
-void Sw::start(){
-	mts = get();
+void Sw64::stopb(char* buf, const char *pfx, const char *sfx){
+
+	sprintf(buf, "%s%.9f%s", pfx, stop(), sfx);
 }
 
-Tf64 Sw::stop(){
+void Sw64::stopp(const char *pfx, const char *sfx){
 
-	return  get() - mts;
+	//stick to %.9f; anything beyond that is random.
+	printf("%s%.9f%s", pfx, stop(), sfx);
 }
 
-void Sw::stopp(const char *pfx, const char *sfx){
+#endif /////////////////////////////////////////////////////////////////////////
 
-	//stick to %.6f; anything beyond that is random.
-	printf("%s%.6f%s", pfx, get()-mts, sfx);
+#if RBGOTIME32 /////////////////////////////////////////////////////////////////
+
+
+void Sw32::start(){
+	us = tsc_us_u32();
 }
 
-Tf64 Sw::get(){
+Tf32 Sw32::stop(){
 
-	gettimeofday(tv, 0);
-	//usec is integer sub div of a sec (0...9999999);
-	//div by 1 million, to get the floating point where we want.
-	return tv->tv_sec + (tv->tv_usec * 0.000001);
+	Tu32 el = tsc_us_u32() - us;
+	return  tsc_us_f32(&el);
 }
+
+void Sw32::stopb(char* buf, const char *pfx, const char *sfx){
+
+	sprintf(buf, "%s%.6f%s", pfx, stop(), sfx);
+}
+
+void Sw32::stopp(const char *pfx, const char *sfx){
+
+	//stick to %.9f; anything beyond that is random.
+	printf("%s%.6f%s", pfx, stop(), sfx);
+}
+
+#endif /////////////////////////////////////////////////////////////////////////
 
 }//ns

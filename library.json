@@ -5,7 +5,7 @@
 	"keywords": "performance speed test",
 	"repository":{
 		"type": "git",
-		"url": "https://github.com/rbgotech-cpp-libs/pcs-sys_rbgo-time.git"
+		"url": "https://github.com/rbgotech-cpp-native-libs/rbgo-time.git"
 	},
 	"authors":[{
 		"name": "Robert Goossens (rbgo)",
@@ -14,10 +14,10 @@
 		"maintainer": true
 	}],
 	"license": "MIT",
-	"homepage": "https://github.com/rbgotech-cpp-libs/pcs-sys_rbgo-time",
+	"homepage": "https://github.com/rbgotech-cpp-native-libs/rbgo-time",
 	"dependencies":{
 		"rbgotech/rbgo-types": "*"
 	},
-	"frameworks": "*",
-	"platforms": "*"
+	"platforms": "native",
+	"frameworks": "*"
 }

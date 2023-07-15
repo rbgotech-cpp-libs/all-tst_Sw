@@ -1,3 +1,4 @@
+#ifdef RBGOTIME_DEVMAIN
 #include <stdlib.h>//setbuf, system, exit, atoi
 #include <stdio.h>//puts, printf, scanf, fgetc
 
@@ -154,3 +155,5 @@ break2:
 	delete sw32;
 	delete sElapsed;
 }
+
+#endif//RBGOTIME_DEVMAIN
